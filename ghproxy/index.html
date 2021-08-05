@@ -1,152 +1,134 @@
-<!DOCTYPE HTML>
-<html>
-	<head>
-		<title>GitHub Proxy 代理加速</title>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-		<link rel="stylesheet" href="https://cdn.ioiox.com/website/ghproxy.com/assets/css/main.min.css" />
-		<link rel="shortcut icon" href="https://cdn.ioiox.com/website/ghproxy.com/favicon.ico">
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<style>
+    html, body {
+        width: 100%;
+        margin: 0;
+    }
 
-		<!-- Twitter Cards -->
-		<meta name="twitter:card" content="summary_large_image" />
-		<meta name="twitter:site" content="@stilleshan" />
-		<meta name="twitter:creator" content="@stilleshan" />
-		<meta property="og:url" content="http://xrproxy.top" />
-		<meta property="og:title" content="GitHub Proxy 代理加速" />
-		<meta property="og:description" content="GitHub 文件 , Releases , archive , gist , raw.githubusercontent.com 文件代理加速下载服务." />
-		<meta property="og:image" content="http://xrproxy.top/images/ghproxy_com_twitter_800.jpg" />
+    html {
+        height: 100%;
+    }
 
-		<!-- Global site tag (gtag.js) - Google Analytics -->
-		<script>
-			window.ga_tid = "UA-184918992-1";
-			window.ga_url = "https://ga.ioiox.com";
-		</script>
-		<script src="https://cdn.ioiox.com/github/giuem/ga-proxy/ga.min.js" async></script>
-	</head>
+    body {
+        min-height: 100%;
+        padding: 20px;
+        box-sizing: border-box;
+    }
 
-	<body class="landing is-preload">
-		<div id="page-wrapper">
+    p {
+        word-break: break-all;
+    }
 
-			<!-- Header -->
-				<header id="header" class="alt">
-					<h1><a href="/">GitHub Proxy</a></h1>
-					<nav id="nav">
-						<ul>
-							<li><a href="/">首页</a></li>
-						</ul>
-					</nav>
-				</header>
+    @media (max-width: 500px) {
+        h1 {
+            margin-top: 80px;
+        }
+    }
 
+    .flex {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
 
-			<!-- CTA -->
-				<section id="cta">
-					<img src="https://cdn.ioiox.com/website/ghproxy.com/images/github.png" height="100" width="100">
-					<br />
-					<h2>GitHub Proxy</h2>
-					<p>GitHub 文件 , Releases , archive , gist , raw.githubusercontent.com 文件代理加速下载服务.</p>
+    .block {
+        display: block;
+        position: relative;
+    }
 
-					<form action="./" method="get" target="__blank">
-						<div class="row gtr-50 gtr-uniform">
-							<div class="col-8 col-12-mobilep">
-								<input class="block url" type="text" name="q" id="email" placeholder="输入 GitHub 文件链接"
-								pattern="^((https|http):\/\/)?(github\.com\/.+?\/.+?\/(?:releases|archive|blob)|((?:raw|gist)\.(?:githubusercontent|github)\.com))\/.+$" required>
-							</div>
-							<div class="col-4 col-12-mobilep">
-								<input type="submit" value="下载">
-							</div>
-						</div>
-					</form>
+    .url {
+        font-size: 18px;
+        padding: 10px 10px 10px 5px;
+        position: relative;
+        width: 300px;
+        border: none;
+        border-bottom: 1px solid #bfbfbf;
+    }
 
-				</section>
+    input:focus {
+        outline: none;
+    }
 
+    .bar {
+        content: '';
+        height: 2px;
+        width: 100%;
+        bottom: 0;
+        position: absolute;
+        background: #00bfb3;
+        transition: 0.2s ease transform;
+        -moz-transition: 0.2s ease transform;
+        -webkit-transition: 0.2s ease transform;
+        transform: scaleX(0);
+    }
 
-				<section id="main" class="container">
-					<header>
-						<h2>使用说明</h2>
-						<p>本站使用 <font color="red">香港AWS月抛</font> 线路,适用于各种网络,如体验不佳,可尝试访问<a href="https://ghproxy.com" target="_blank">其余加速站</a>使用.
-							</p>
-					</header>
-					<div class="row">
-						<div class="col-12">
+    .url:focus ~ .bar {
+        transform: scaleX(1);
+    }
 
-							<!-- Text -->
-								<section class="box">
-									<h3>终端命令行</h3>
-									<p>支持终端命令行 git clone , wget , curl 等工具下载.
-									<br>
-									支持 <font color="red">raw.githubusercontent.com</font> , <font color="red">gist.github.com</font> , <font color="red">gist.githubusercontent.com</font> 文件下载.
-									<br>
-									<b>注意：</b>不支持 SSH Key 方式 git clone 下载.</p>
+    .btn {
+        line-height: 38px;
+        background-color: #00bfb3;
+        color: #fff;
+        white-space: nowrap;
+        text-align: center;
+        font-size: 14px;
+        border: none;
+        border-radius: 2px;
+        cursor: pointer;
+        padding: 5px;
+        width: 160px;
+        margin: 30px 0;
+    }
 
-									<hr />
+    .tips, .example {
+        color: #7b7b7b;
+        position: relative;
+        align-self: flex-start;
+        margin-left: 7.5em;
+    }
 
-									<header>
-										<h4><b>git clone</b></h4>
-									</header>
-									<p><b>git clone</b> <font color="red">http://xrproxy.top/</font><font color="green">https://github.com/stilleshan/ServerStatus</font></p>
-									
-									<header>
-										<h4><b>wget & curl</b></h4>
-									</header>
-									<p><b>wget</b> <font color="red">http://xrproxy.top/</font><font color="green">https://github.com/stilleshan/ServerStatus/archive/master.zip</font>
-									<br>
-									<b>wget</b> <font color="red">http://xrproxy.top/</font><font color="green">https://raw.githubusercontent.com/stilleshan/ServerStatus/master/Dockerfile</font>
-									<br>
-									<b>curl -O</b> <font color="red">http://xrproxy.top/</font><font color="green">https://github.com/stilleshan/ServerStatus/archive/master.zip</font>
-									<br>
-									<b>curl -O</b> <font color="red">http://xrproxy.top/</font><font color="green">https://raw.githubusercontent.com/stilleshan/ServerStatus/master/Dockerfile</font></p>								
-								</section>
+    .tips > p:first-child::before {
+        position: absolute;
+        left: -3em;
+        content: 'PS：';
+        color: #7b7b7b
+    }
 
-								<section class="box">
-									<h3>首页下载</h3>
-									<p>在本页地址栏输入合规链接（参考以下链接）点击下载按钮
-									<br>
-									支持 <font color="red">raw.githubusercontent.com</font> , <font color="red">gist.github.com</font> , <font color="red">gist.githubusercontent.com</font> 文件下载.</p>
-
-									<hr />
-
-									<header>
-										<h4><b>Raw 文件</b></h4>
-									</header>
-									<p>https://raw.githubusercontent.com/stilleshan/ServerStatus/master/Dockerfile</p>
-
-									<header>
-										<h4><b>分支源码</b></h4>
-									</header>
-									<p>https://github.com/stilleshan/ServerStatus/archive/master.zip</p>									
-									
-									<header>
-										<h4><b>Releases 源码</b></h4>
-									</header>
-									<p>https://github.com/stilleshan/ServerStatus/archive/v1.0.tar.gz</p>
-
-
-									<header>
-										<h4><b>Releases 文件</b></h4>
-									</header>
-									<p>https://github.com/fatedier/frp/releases/download/v0.33.0/frp_0.33.0_linux_amd64.tar.gz</p>
-								</section>
-						</div>
-					</div>	
-				</section>			
-							
-
-			<!-- Footer -->
-				<footer id="footer">
-					<ul class="copyright">
-						<li>&copy; ghproxy.com. All rights reserved.</li><li>Github Project : <a href="https://github.com/hunshcn/gh-proxy" target="_blank">hunshcn/gh-proxy</a></li>
-					</ul>
-				</footer>
-
-		</div>
-
-		<!-- Scripts -->
-			<script src="https://cdn.ioiox.com/website/ghproxy.com/assets/js/jquery.min.js"></script>
-			<script src="https://cdn.ioiox.com/website/ghproxy.com/assets/js/jquery.dropotron.min.js"></script>
-			<script src="https://cdn.ioiox.com/website/ghproxy.com/assets/js/jquery.scrollex.min.js"></script>
-			<script src="https://cdn.ioiox.com/website/ghproxy.com/assets/js/browser.min.js"></script>
-			<script src="https://cdn.ioiox.com/website/ghproxy.com/assets/js/breakpoints.min.js"></script>
-			<script src="https://cdn.ioiox.com/website/ghproxy.com/assets/js/util.js"></script>
-			<script src="https://cdn.ioiox.com/website/ghproxy.com/assets/js/main.js"></script>
-	</body>
+    .example > p:first-child::before {
+        position: absolute;
+        left: -7.5em;
+        content: '合法输入示例：';
+        color: #7b7b7b
+    }
+</style>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <script>
+        function toSubmit(e) {
+            e.preventDefault()
+            window.open('/' + document.getElementsByName('q')[0].value);
+            return false
+        }
+    </script>
+    <title>GitHub 文件加速</title>
+</head>
+<body class="flex">
+<h1 style="margin-bottom: 50px"><img src="https://ae01.alicdn.com/kf/H2fc84859291347418b11091fe0e508b8v.png" style="width: 1.5em;margin-right: .2em;vertical-align: bottom;">GitHub 文件加速</h1>
+<form action="./" method="get" style="padding-bottom: 40px" target="_blank" class="flex" onsubmit="toSubmit(event)">
+    <label class="block" style="width: fit-content">
+        <input class="block url" name="q" type="text" placeholder="键入Github文件链接"
+               pattern="^((https|http):\/\/)?(github\.com\/.+?\/.+?\/(?:releases|archive|blob)|((?:raw|gist)\.(?:githubusercontent|github)\.com))\/.+$" required>
+        <div class="bar"></div>
+    </label>
+    <input class="block btn" type="submit" value="下载">
+</form>
+<p style="position: sticky;top: calc(100% - 2.5em);">项目基于Cloudflare Workers，开源于GitHub <a style="color: #3294ea"
+                                                                                         href="https://github.com/hunshcn/gh-proxy">hunshcn/gh-proxy</a>
+</p>
+</body>
 </html>
